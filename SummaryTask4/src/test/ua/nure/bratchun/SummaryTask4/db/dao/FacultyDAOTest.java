@@ -1,9 +1,7 @@
 package test.ua.nure.bratchun.SummaryTask4.db.dao;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.log4j.BasicConfigurator;
 import org.junit.jupiter.api.AfterAll;

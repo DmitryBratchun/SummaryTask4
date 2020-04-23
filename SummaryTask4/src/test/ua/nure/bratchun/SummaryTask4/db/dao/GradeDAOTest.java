@@ -32,7 +32,7 @@ class GradeDAOTest {
 	private static Grade grade;
 	
 	@BeforeAll
-	public static void setUpClass() throws  {
+	public static void setUpClass() throws DBException {
 		BasicConfigurator.configure();
 		
 		entrant = new Entrant();
