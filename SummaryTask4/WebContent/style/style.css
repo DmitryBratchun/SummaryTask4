@@ -1,0 +1,380 @@
+/***************************************************************
+CSS customers style
+***************************************************************/
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+/***************************************************************
+CSS for button
+***************************************************************/
+a.bot1g{
+    background:linear-gradient(to bottom, #52b362, #519c5d) #4CAF50 repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #fff;
+        text-decoration:none;
+    
+    font-size: 17px;
+        width:120px;
+    line-height: 20px;
+    padding: 4px 12px;
+    text-align: left;
+    vertical-align: top;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+a.bot1g:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+a.bot1g:active {
+
+  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.1));
+  box-shadow:
+   inset rgba(0,0,0,.8) 0 1px 2px,
+   inset rgba(0,0,0,.05) 0 -1px 0,
+   #fff 0 1px 1px;
+}
+
+a.bot1g:hover {
+	  background: linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.15));
+
+  -webkit-transform: translateY( -3px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+a.bot1{
+    background:linear-gradient(to bottom, #FFFFFF, #E6E6E6) #F5F5F5 repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #B3B3B3;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333333;
+        text-decoration:none;
+    
+    font-size: 17px;
+        width:120px;
+    line-height: 20px;
+    padding: 4px 12px;
+    text-align: left;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: top;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+a.bot1:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform, opacity;
+  transition-property: transform, opacity;
+}
+
+a.bot1:active {
+
+  background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.1));
+  box-shadow:
+   inset rgba(0,0,0,.8) 0 1px 2px,
+   inset rgba(0,0,0,.05) 0 -1px 0,
+   #fff 0 1px 1px;
+}
+
+a.bot1:hover {
+	  background: linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.15));
+
+  -webkit-transform: translateY( -3px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+/***************************************************************
+CSS for all JSP pages
+***************************************************************/
+body {
+	margin: 0;
+}
+
+#header, #footer, .content {
+	border: 0px solid;	
+}
+
+/***************************************************************
+Style of the main table
+***************************************************************/
+#main-container {
+	width: 100%;
+	height: 100%;
+}
+
+/***************************************************************
+Header style (TD tag in the first top row)
+***************************************************************/
+#header {
+	height:20px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius:10px;
+  background-color: #f2f2f2;
+  padding: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/***************************************************************
+Style for the left located head menu (DIV tag at left)
+***************************************************************/
+#leftHeader {
+	float: left;
+	margin-left: 10px;
+	padding: 2px;
+}
+
+/***************************************************************
+Style for the right located head menu (DIV tag at right)
+***************************************************************/
+#rightHeader {
+	float: right;
+	text-align: right;
+	margin-right: 10px;
+	padding: 2px;
+	
+}
+
+/***************************************************************
+Content styles (TD tag in the main middle row)
+***************************************************************/
+.content {
+	height: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	text-align: center;
+	vertical-align: top;
+}
+
+/***************************************************************
+Footer style (TD tag in the last bottom row)
+***************************************************************/
+#footer {
+	text-align: center;
+	background-color: #f2f2f2;
+}
+
+/***************************************************************
+Style for the ERROR message
+***************************************************************/
+.error {
+	font-size: large;
+	color: rgb(204, 0, 0);
+}
+
+/***************************************************************
+Miscellaneous
+***************************************************************/
+.center {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.noborder {
+	border: 2px solid red;	
+}
+td {
+	text-align: left;
+	padding: 10px;
+}
+
+table {
+	border-collapse:collapse;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    display: block;
+    margin: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+input[type=text],input[type=password],input[type=email], input[type=number], select, textarea {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 4px 4px 4px 0;
+  display: inline-block;
+}
+
+input[type=submit].form {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 40px ;
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit].form:hover {
+  background-color: #45a049;
+}
+
+input[type=submit].delete {
+  background-color: #d90404;
+  color: white;
+  padding: 12px 40px ;
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+
+input[type=submit].delete:hover {
+  background-color: #ab0303;
+}
+
+input[type=submit].sdel {
+  background-color: #d90404;
+  color: white;
+  padding: 5px 40px ;
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit].sdel:hover {
+  background-color: #ab0303;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 5px;
+  width: 500px;
+}
+.row {
+	text-align:left;
+	padding:4px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.col-25 {
+  float: left;
+  width: 30%;
+  margin-top: 0px;
+}
+
+.col-75 {
+  float: left;
+  width: 70%;
+  margin-top: 0px;
+}
+
+.header {
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius:10px;
+  background-color: #f2f2f2;
+  padding: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.header:after {
+	padding:10px;
+}
+/***************************************************************
+CSS validation
+***************************************************************/
+.validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 0px center;
+	
+color: #D63301;
+background-color: #FFCCBA;
+	background-image: url(../images/error.png);
+} 
+
+}
