@@ -18,7 +18,7 @@ class FacultyDAOTest {
 	private static FacultyDAO facultyDAO;
 	
 	@BeforeAll
-	public static void setUpClass() throws Exception {
+	public static void setUpClass() throws DBException {
 		BasicConfigurator.configure();
 		faculty = new Faculty();
 		faculty.setBudgetPlaces(3);

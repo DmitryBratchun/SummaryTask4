@@ -2,7 +2,7 @@ package ua.nure.bratchun.SummaryTask4.db.entity;
 
 public class Application {
 	private Entrant entrant;
-	private double DiplomaScore;
+	private double diplomaScore;
 	private double preliminaryScore;
 	private int entryTypeId;
 	private int facultyId;
@@ -55,11 +55,11 @@ public class Application {
 	}
 
 	public double getDiplomaScore() {
-		return DiplomaScore;
+		return diplomaScore;
 	}
 
 	public void setDiplomaScore(double diplomaScore) {
-		DiplomaScore = diplomaScore;
+		this.diplomaScore = diplomaScore;
 	}
 	
 	public boolean getIsBlocked() {
@@ -72,5 +72,6 @@ public class Application {
 	public String getLang() {
 		return entrant.getLang();
 	}
+
 
 }
