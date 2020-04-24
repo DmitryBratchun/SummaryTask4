@@ -13,7 +13,7 @@ version="4.0">
 =============================================================-->
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
-		<filter-class>ua.nure.bratchun.SummaryTask4.web.filter.EncodingFilter</filter-class>
+		<filter-class>ua.nure.bratchun.summary_task4.web.filter.EncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -38,7 +38,7 @@ version="4.0">
  
 	<filter>
 		<filter-name>CommandAccessFilter</filter-name>
-		<filter-class>ua.nure.bratchun.SummaryTask4.web.filter.CommandAccessFilter</filter-class>
+		<filter-class>ua.nure.bratchun.summary_task4.web.filter.CommandAccessFilter</filter-class>
 		<init-param>
 			<param-name>admin</param-name>
 			<param-value>viewAdminPage editFaculty addFaculty editSubjects addSubject viewStatement addToStatement fileStatement blockEntrant viewBlockedEntrants unblockEntrant</param-value>
@@ -67,7 +67,7 @@ version="4.0">
 =============================================================-->
 	<servlet>
 		<servlet-name>Controller</servlet-name>
-		<servlet-class>ua.nure.bratchun.SummaryTask4.web.Controller</servlet-class>
+		<servlet-class>ua.nure.bratchun.summary_task4.web.Controller</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -78,6 +78,6 @@ version="4.0">
 	Context listener
 =============================================================-->
   <listener>
-	<listener-class>ua.nure.bratchun.SummaryTask4.web.listener.ContextListener</listener-class> 
+	<listener-class>ua.nure.bratchun.summary_task4.web.listener.ContextListener</listener-class> 
    </listener>
 </web-app>

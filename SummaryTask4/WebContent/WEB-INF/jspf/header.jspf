@@ -2,7 +2,7 @@
 Header (top area). 
 ===========================================================================--%> 
 
-<%@ page import="ua.nure.bratchun.SummaryTask4.db.Role" %>
+<%@ page import="ua.nure.bratchun.summary_task4.db.Role" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 

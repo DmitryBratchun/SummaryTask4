@@ -7,7 +7,7 @@
 	<uri>/WEB-INF/helloworldTag</uri>
 	<tag>
 		<name>footer</name>
-		<tag-class>ua.nure.bratchun.SummaryTask4.CustomTag</tag-class>
+		<tag-class>ua.nure.bratchun.summary_task4.CustomTag</tag-class>
 		<body-content>empty</body-content>
 		<info>footer</info>
 	</tag>
