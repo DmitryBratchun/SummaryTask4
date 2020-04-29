@@ -7,6 +7,9 @@ package ua.nure.bratchun.summary_task4.db;
  */
 public final class Fields {
 	
+	/**
+	 * Private utility class constructor
+	 */
 	private Fields() {}
 	
 	public static final String ENTITY_ID ="id";

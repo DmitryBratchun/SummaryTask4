@@ -18,6 +18,11 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
+/**
+ * Create a new subject
+ * @author D.Bratchun
+ *
+ */
 public class AddSubjectCommand extends Command{
 
 	private static final long serialVersionUID = -4988687434581367117L;
@@ -30,19 +35,19 @@ public class AddSubjectCommand extends Command{
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet();
 		}
 		LOG.debug("Command finished");
 		return result;
 	}
 	
-	private String doGet(HttpServletRequest request, HttpServletResponse response) {
+	private String doGet() {
 		return Path.PAGE_ADD_SUBJECT;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	private String doPost(HttpServletRequest request) throws AppException {
 		String nameRu = request.getParameter("nameRu");
 		String nameEn = request.getParameter("nameEn");
 		

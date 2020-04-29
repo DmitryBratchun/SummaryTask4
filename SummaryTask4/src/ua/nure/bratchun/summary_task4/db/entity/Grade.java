@@ -1,5 +1,10 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
+/**
+ * Grade
+ * @author D.Bratchun
+ *
+ */
 public class Grade extends Entity{
 	
 	public Grade() {}

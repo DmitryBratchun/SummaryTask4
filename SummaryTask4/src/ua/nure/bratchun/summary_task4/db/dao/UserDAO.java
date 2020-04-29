@@ -37,12 +37,19 @@ public class UserDAO extends AbstractDAO{
 			+ "password =?, first_name=?, last_name=?, email=?, lang=?, role_id=? "
 			+ "WHERE id=?";
 
-	// constructor constructor with the option not to use JNDI for Junit
+	/**
+	 * constructor constructor with the option not to use JNDI for Junit
+	 * @param isUseJNDI
+	 * @throws DBException
+	 */
 	private UserDAO(boolean isUseJNDI) throws DBException {
 		super(isUseJNDI);
 	}
 	
-	//standard constructor
+	/**
+	 * standard constructor
+	 * @throws DBException
+	 */
 	private UserDAO() throws DBException {
 		super();
 	}
@@ -66,7 +73,11 @@ public class UserDAO extends AbstractDAO{
 		return user;
 	}
 	
-	// singleton pattern
+	/**
+	 * singleton pattern
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized UserDAO getInstance() throws DBException{
 		if(instance == null) {
 			instance = new UserDAO();
@@ -74,7 +85,12 @@ public class UserDAO extends AbstractDAO{
 		return instance;
 	}
 	
-	// singleton pattern with use constructor with the option not to use JNDI for Junit 
+	/**
+	 * singleton pattern with use constructor with the option not to use JNDI for Junit 
+	 * @param isUseJNDI
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized UserDAO getInstance(boolean isUseJNDI) throws DBException{
 		if(instance == null) {
 			instance = new UserDAO(isUseJNDI);

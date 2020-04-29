@@ -21,10 +21,10 @@ class EntrantDAOTest {
 	private static EntrantDAO entrantDAO;
 
 	@BeforeAll
-	public static void setUpClass() throws Exception {
+	public static void setUpClass() throws DBException {
 		BasicConfigurator.configure();
 		entrant = new Entrant();
-		entrant.setFirstName("testuser");
+		entrant.setFirstName("testusername");
 		entrant.setLogin("testuser");
 		entrant.setLastName("testuser");
 		entrant.setEmail("testuser@gmail.com");

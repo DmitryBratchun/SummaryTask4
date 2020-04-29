@@ -23,6 +23,7 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
  */
 public class SubjectDAO extends AbstractDAO{
 	
+	// singleton variable
 	private static SubjectDAO instance;
 	
 	private static final Logger LOG = Logger.getLogger(SubjectDAO.class);
@@ -37,12 +38,19 @@ public class SubjectDAO extends AbstractDAO{
 			+ "JOIN faculty_subjects ON subjects.id = faculty_subjects.subject_id "
 			+ "WHERE faculty_subjects.faculty_id=?";
 	
-	// standard constructor
+	/**
+	 * standard constructor
+	 * @throws DBException
+	 */
 	private SubjectDAO() throws DBException {
 		super();
 	}
 	
-	// constructor constructor with the option not to use JNDI for Junit
+	/**
+	 * constructor constructor with the option not to use JNDI for Junit
+	 * @param isUseJNDI
+	 * @throws DBException
+	 */
 	private SubjectDAO(boolean isUseJNDI) throws DBException {
 		super(isUseJNDI);
 	}
@@ -61,7 +69,11 @@ public class SubjectDAO extends AbstractDAO{
 		return subject;
 	}
 	
-	// singleton pattern
+	/**
+	 * singleton pattern
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized SubjectDAO getInstance() throws DBException{
 		if(instance == null) {
 			instance = new SubjectDAO();
@@ -69,7 +81,12 @@ public class SubjectDAO extends AbstractDAO{
 		return instance;
 	}
 	
-	// singleton pattern with use constructor with the option not to use JNDI for Junit 
+	/**
+	 * singleton pattern with use constructor with the option not to use JNDI for Junit 
+	 * @param isUseJNDI
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized SubjectDAO getInstance(boolean isUseJNDI) throws DBException{
 		if(instance == null) {
 			instance = new SubjectDAO(isUseJNDI);

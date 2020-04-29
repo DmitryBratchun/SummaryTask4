@@ -11,6 +11,11 @@ import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
+/**
+ * View admin page
+ * @author D.Bratchun
+ *
+ */
 public class CommandViewAdminPage extends Command{
 
 	private static final long serialVersionUID = -6743607626454787498L;

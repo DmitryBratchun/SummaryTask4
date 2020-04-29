@@ -36,6 +36,8 @@ public class Sender {
 
     public void send(String subject, String text, String fromEmail, String toEmail){
         Session session = Session.getDefaultInstance(props, new Authenticator() {
+        	
+        	@Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }

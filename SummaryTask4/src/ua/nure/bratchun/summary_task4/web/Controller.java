@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import ua.nure.bratchun.summary_task4.Path;
 import ua.nure.bratchun.summary_task4.exception.AppException;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 import ua.nure.bratchun.summary_task4.web.command.CommandContainer;
 
@@ -30,7 +31,7 @@ public class Controller extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		LOG.debug("Try to execute GET command (" + request.getParameter("command") + ")");
+		LOG.debug("Try to execute GET command (" + request.getParameter(AttributeNames.COMMAND) + ")");
 		String forward = process(request, response, HttpMethod.GET);
 		request.getRequestDispatcher(forward).forward(request, response);
 	}
@@ -38,9 +39,10 @@ public class Controller extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		LOG.debug("Try to execute POST command (" + request.getParameter("command") + ")");
+		LOG.debug("Try to execute POST command (" + request.getParameter(AttributeNames.COMMAND) + ")");
 		String redirect = process(request, response, HttpMethod.POST);
 		response.sendRedirect(redirect);
+		
 	}
 
 	/**
@@ -52,7 +54,7 @@ public class Controller extends HttpServlet {
 		LOG.debug("Controller starts");
 
 		// extract command name from the request
-		String commandName = request.getParameter("command");
+		String commandName = request.getParameter(AttributeNames.COMMAND);
 		LOG.trace("Request parameter: command --> " + commandName);
 
 		// obtain command object by its name

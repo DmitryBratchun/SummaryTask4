@@ -23,6 +23,7 @@ public class EncodingFilter implements Filter{
 	
 	private String encoding;
 
+	@Override
 	public void destroy() {
 		LOG.debug("Filter destruction starts");
 		// 
@@ -47,6 +48,7 @@ public class EncodingFilter implements Filter{
 		chain.doFilter(request, response);
 	}
 
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 		LOG.debug("Filter initialization starts");
 		encoding = fConfig.getInitParameter("encoding");

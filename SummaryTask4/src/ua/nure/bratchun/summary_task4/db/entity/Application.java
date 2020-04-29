@@ -1,5 +1,10 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
+/**
+ * Application for entry in the statement
+ * @author D.Bratchun
+ *
+ */
 public class Application {
 	private Entrant entrant;
 	private double diplomaScore;

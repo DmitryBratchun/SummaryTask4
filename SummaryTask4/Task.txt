@@ -1,3 +1,0 @@
-Create DBManager with extract method, find ... Метод который возвращает лист групп.
-Create Command and CommandLogin
-Login page

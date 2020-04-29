@@ -1,5 +1,10 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
+/**
+ * User
+ * @author D.Bratchun
+ *
+ */
 public class User extends Entity{
 
 	private static final long serialVersionUID = -8402369682289356425L;

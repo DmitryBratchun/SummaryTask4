@@ -21,7 +21,9 @@ import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.exception.DBException;
 import ua.nure.bratchun.summary_task4.exception.Messages;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 /**
  * View faculty
  * @author D.Bratchun
@@ -37,13 +39,13 @@ public class ViewFacultyCommand extends Command{
 			throws IOException, ServletException, AppException {
 		LOG.debug("Start executing Command");
 		String result = null;
-		result = doGet(request, response);
+		result = doGet(request);
 		LOG.debug("Finished executing Command");
 		return result;
 	}
 	
-	private String doGet(HttpServletRequest request, HttpServletResponse response) throws AppException {
-		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+	private String doGet(HttpServletRequest request) throws AppException {
+		int facultyId = Integer.parseInt(request.getParameter(ParameterNames.FACULTY_ID));
 		StatementDAO statementDAO = StatementDAO.getInstance();
 		
 		Faculty faculty = null;
@@ -51,7 +53,7 @@ public class ViewFacultyCommand extends Command{
 			FacultyDAO facultyDAO = FacultyDAO.getInstance();
 			faculty = facultyDAO.findById(facultyId);
 			
-			request.setAttribute("faculty", faculty);
+			request.setAttribute(AttributeNames.FACULTY, faculty);
 			LOG.debug("request faculty " + faculty);
 		} catch (DBException e) {
 			LOG.error(Messages.ERR_CANNOT_GET_FACULTY, e);
@@ -59,23 +61,23 @@ public class ViewFacultyCommand extends Command{
 		}
 		
 		
-		String result = Path.PAGE_ERROR;
+		String result;
 		// Admin page
-		if(request.getSession().getAttribute("userRole") == Role.ADMIN) {
+		if(request.getSession().getAttribute(AttributeNames.USER_ROLE) == Role.ADMIN) {
 			if(statementDAO.hasStatementResult(facultyId)) {
 				return Path.COMMAND_VIEW_STATEMENT;
 			}
 			//pagination
 			int page = 1;
 			int lines = 10;
-			if(request.getParameter("page")!=null ) {	
-				page = Integer.parseInt(request.getParameter("page").replace("/D", ""));
+			if(request.getParameter(ParameterNames.PAGINATION_PAGE)!=null ) {	
+				page = Integer.parseInt(request.getParameter(ParameterNames.PAGINATION_PAGE).replace("/D", ""));
 			}
 			if (page <1){
 				page = 1;
 			} 
-			if(request.getParameter("lines")!=null) {	
-				lines = Integer.parseInt(request.getParameter("lines").replace("/D", ""));
+			if(request.getParameter(ParameterNames.PAGINATION_LINES)!=null) {	
+				lines = Integer.parseInt(request.getParameter(ParameterNames.PAGINATION_LINES).replace("/D", ""));
 			}
 			if (lines <1){
 				lines = 10;
@@ -86,9 +88,9 @@ public class ViewFacultyCommand extends Command{
 				page--;
 				applications = statementDAO.getApplicationByFacultyId(facultyId, (page-1)*lines ,lines);
 			}
-			request.setAttribute("lines", lines);
-			request.setAttribute("page", page);
-			request.setAttribute("applications", applications);
+			request.setAttribute(AttributeNames.PAGINATION_LINES, lines);
+			request.setAttribute(AttributeNames.PAGINATION_PAGE, page);
+			request.setAttribute(AttributeNames.APPLICATIONS, applications);
 			
 			result = Path.PAGE_FACULTY_ENTRANTS;
 			
@@ -106,10 +108,10 @@ public class ViewFacultyCommand extends Command{
 				throw new AppException(Messages.ERR_CANNOT_GET_SUBJECTS, e);
 			}
 			
-			request.setAttribute("diplomaSubjects", diplomaSubjects);
+			request.setAttribute(AttributeNames.DIPLOMA_SUBJECTS, diplomaSubjects);
 			LOG.debug("request diploma subjects " + diplomaSubjects);
 			
-			request.setAttribute("preliminarySubjects", preliminarySubjects);
+			request.setAttribute(AttributeNames.PRELIMINARY_SUBJECTS, preliminarySubjects);
 			LOG.debug("request preliminary subjects " + preliminarySubjects);
 			
 			result = Path.PAGE_ENTRY_FACULTY;

@@ -21,11 +21,10 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
  * @author D.Bratchun
  *
  */
-public class EntrantDAO extends AbstractDAO{
-	
-	
+public class EntrantDAO extends AbstractDAO {
+
 	private static final Logger LOG = Logger.getLogger(EntrantDAO.class);
-	
+
 	// SQL commands
 	private static EntrantDAO instance;
 
@@ -43,20 +42,30 @@ public class EntrantDAO extends AbstractDAO{
 			+ "password=?, first_name=?, last_name=?, email=?, lang=?, role_id=? " + " WHERE id=?";
 	private static final String SQL_FIND_BLOCKED_ENTRANTS = "SELECT users.login, users.password, users.first_name, users.last_name, users.email, users.lang , entrants.* "
 			+ "FROM users JOIN entrants ON entrants.id = users.id WHERE entrants.isBlocked = true";
-	
-	// standard constructor
+
+	/**
+	 * Standard constructor
+	 * 
+	 * @throws DBException
+	 */
 	private EntrantDAO() throws DBException {
 		super();
 	}
-	
-	// constructor without JNDI for Junit
+
+	/**
+	 * constructor without JNDI for Junit
+	 * 
+	 * @param isUseJNDI
+	 * @throws DBException
+	 */
 	private EntrantDAO(boolean isUseJNDI) throws DBException {
 		super(isUseJNDI);
 	}
 
 	/**
 	 * Extract entrant from ResultSet
-	 * @param ResultSet from the database request 
+	 * 
+	 * @param ResultSet from the database request
 	 * @return Entrant
 	 * @throws SQLException
 	 */
@@ -70,38 +79,39 @@ public class EntrantDAO extends AbstractDAO{
 		entrant.setLogin(rs.getString(Fields.USER_LOGIN));
 		entrant.setPassword(rs.getString(Fields.USER_PASSWORD));
 		entrant.setRoleId(0);
-		
+
 		entrant.setCity(rs.getString(Fields.ENTRANTS_CITY));
 		entrant.setRegion(rs.getString(Fields.ENTRANTS_REGION));
 		entrant.setSchool(rs.getString(Fields.ENTRANTS_SCHOOL));
 		entrant.setIsBlocked(rs.getBoolean(Fields.ENTRANTS_IS_BLOCKED));
-		
+
 		return entrant;
 	}
 
 	// singleton pattern
-	public static synchronized EntrantDAO getInstance() throws DBException{
-		if(instance == null) {
+	public static synchronized EntrantDAO getInstance() throws DBException {
+		if (instance == null) {
 			instance = new EntrantDAO();
 		}
 		return instance;
 	}
-	
+
 	// singleton pattern use constructor without JUNDI for Junit
-	public static synchronized EntrantDAO getInstance(boolean isUseJNDI) throws DBException{
-		if(instance == null) {
+	public static synchronized EntrantDAO getInstance(boolean isUseJNDI) throws DBException {
+		if (instance == null) {
 			instance = new EntrantDAO(isUseJNDI);
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Insert entrant
+	 * 
 	 * @param entrant
 	 * @throws DBException
 	 */
 	public boolean insert(Entrant entrant) throws DBException {
-		
+
 		PreparedStatement statementUser = null;
 		PreparedStatement statementEntrant = null;
 		ResultSet resultSetUser = null;
@@ -109,15 +119,15 @@ public class EntrantDAO extends AbstractDAO{
 		Connection connectionUser = null;
 		Connection connectionEntrant = null;
 		boolean result = false;
-		
+
 		try {
-			
+
 			connectionUser = getConnection();
 			connectionEntrant = getConnection();
 			statementUser = connectionUser.prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS);
 			statementEntrant = connectionEntrant.prepareStatement(SQL_INSERT_ENTRANTS, Statement.RETURN_GENERATED_KEYS);
 			int k = 1;
-			
+
 			statementUser.setString(k++, entrant.getLogin());
 			statementUser.setString(k++, entrant.getPassword());
 			statementUser.setString(k++, entrant.getFirstName());
@@ -125,8 +135,8 @@ public class EntrantDAO extends AbstractDAO{
 			statementUser.setString(k++, entrant.getEmail());
 			statementUser.setString(k++, entrant.getLang());
 			statementUser.setInt(k, entrant.getRoleId());
-			
-			if(statementUser.executeUpdate()>0) {
+
+			if (statementUser.executeUpdate() > 0) {
 				resultSetUser = statementUser.getGeneratedKeys();
 				if (resultSetUser.next()) {
 					entrant.setId(resultSetUser.getInt(1));
@@ -134,14 +144,14 @@ public class EntrantDAO extends AbstractDAO{
 			} else {
 				throw new SQLException(Messages.ERR_CANNOT_CREATE_USER);
 			}
-			k=1;
+			k = 1;
 			statementEntrant.setString(k++, entrant.getCity());
 			statementEntrant.setString(k++, entrant.getRegion());
 			statementEntrant.setString(k++, entrant.getSchool());
 			statementEntrant.setInt(k++, entrant.getId());
-			if(statementEntrant.executeUpdate()>0) {
+			if (statementEntrant.executeUpdate() > 0) {
 				resultSetEntrant = statementEntrant.getGeneratedKeys();
-				if(resultSetEntrant.next()) {
+				if (resultSetEntrant.next()) {
 					entrant.setId(resultSetEntrant.getInt(1));
 					result = true;
 				}
@@ -153,12 +163,13 @@ public class EntrantDAO extends AbstractDAO{
 			close(connectionEntrant, statementEntrant, resultSetEntrant);
 			close(connectionUser, statementUser, resultSetUser);
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * Update entrant
+	 * 
 	 * @param entrant
 	 * @throws DBException
 	 */
@@ -170,15 +181,15 @@ public class EntrantDAO extends AbstractDAO{
 		Connection connectionUser = null;
 		Connection connectionEntrant = null;
 		boolean result = false;
-		
+
 		try {
-			
+
 			connectionUser = getConnection();
 			connectionEntrant = getConnection();
 			statementUser = connectionUser.prepareStatement(SQL_UPDATE_USER, Statement.RETURN_GENERATED_KEYS);
 			statementEntrant = connectionEntrant.prepareStatement(SQL_UPDATE_ENTRANT, Statement.RETURN_GENERATED_KEYS);
 			int k = 1;
-			
+
 			statementUser.setString(k++, entrant.getPassword());
 			statementUser.setString(k++, entrant.getFirstName());
 			statementUser.setString(k++, entrant.getLastName());
@@ -186,16 +197,16 @@ public class EntrantDAO extends AbstractDAO{
 			statementUser.setString(k++, entrant.getLang());
 			statementUser.setInt(k++, entrant.getRoleId());
 			statementUser.setInt(k, entrant.getId());
-			
-			if(statementUser.executeUpdate() > 0) {
+
+			if (statementUser.executeUpdate() > 0) {
 				LOG.trace("User with login " + entrant.getLogin() + " try to update");
 			}
-			k=1;
+			k = 1;
 			statementEntrant.setString(k++, entrant.getCity());
 			statementEntrant.setString(k++, entrant.getRegion());
 			statementEntrant.setString(k++, entrant.getSchool());
 			statementEntrant.setInt(k++, entrant.getId());
-			if(statementEntrant.executeUpdate()>0) {
+			if (statementEntrant.executeUpdate() > 0) {
 				LOG.trace("Entrant with login " + entrant.getLogin() + " try to update");
 			}
 			result = true;
@@ -206,13 +217,14 @@ public class EntrantDAO extends AbstractDAO{
 			close(connectionEntrant, statementEntrant, resultSetEntrant);
 			close(connectionUser, statementUser, resultSetUser);
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 	/**
 	 * Delete entrant
+	 * 
 	 * @param login
 	 * @throws DBException
 	 */
@@ -220,15 +232,16 @@ public class EntrantDAO extends AbstractDAO{
 		UserDAO userDAO = UserDAO.getInstance(isUseJNDI());
 		return userDAO.deleteByLogin(login);
 	}
-	
+
 	/**
 	 * Block entrant by id
+	 * 
 	 * @param id
 	 * @throws DBException
 	 */
 	public boolean blockById(int id) throws DBException {
 		boolean result = false;
-		
+
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection con = null;
@@ -237,7 +250,7 @@ public class EntrantDAO extends AbstractDAO{
 			statement = con.prepareStatement(SQL_BLOCK_ENTRANT_BY_ID);
 			statement.setInt(1, id);
 			result = statement.executeUpdate() > 0;
-			LOG.trace("Entrant (id:" + id  + ") has been blocked ");
+			LOG.trace("Entrant (id:" + id + ") has been blocked ");
 		} catch (SQLException e) {
 			LOG.error(Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
 			throw new DBException(Messages.ERR_CANNOT_OBTAIN_CONNECTION, e);
@@ -246,19 +259,20 @@ public class EntrantDAO extends AbstractDAO{
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Unblock for entrant by id
+	 * 
 	 * @param id
 	 * @throws DBException
 	 */
 	public boolean unblockById(int id) throws DBException {
 		boolean result = false;
-		
+
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection con = null;
-		
+
 		try {
 			con = getConnection();
 			statement = con.prepareStatement(SQL_UNBLOCK_ENTRANT_BY_ID);
@@ -273,24 +287,25 @@ public class EntrantDAO extends AbstractDAO{
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Find all entrants
+	 * 
 	 * @return list of entrants
 	 * @throws DBException
 	 */
 	public List<Entrant> findAll() throws DBException {
 		List<Entrant> entrants = new ArrayList<>();
-		
+
 		Connection con = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			con = getConnection();
 			statement = con.prepareStatement(SQL_FIND_ENTRANTS);
 			resultSet = statement.executeQuery();
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				entrants.add(extract(resultSet));
 			}
 		} catch (SQLException e) {
@@ -299,10 +314,10 @@ public class EntrantDAO extends AbstractDAO{
 		} finally {
 			close(con, statement, resultSet);
 		}
-		
+
 		return entrants;
 	}
-	
+
 	/**
 	 * Find entrant by login
 	 */
@@ -311,12 +326,12 @@ public class EntrantDAO extends AbstractDAO{
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
 		Connection con = null;
-		
+
 		try {
 			con = getConnection();
 			statement = con.prepareStatement(SQL_FIND_ENTRANT_BY_LOGIN);
 			statement.setString(1, login);
-			
+
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				entrant = extract(resultSet);
@@ -329,9 +344,10 @@ public class EntrantDAO extends AbstractDAO{
 		}
 		return entrant;
 	}
-	
+
 	/**
 	 * This method returns a list of blocked entrants
+	 * 
 	 * @param offset
 	 * @param lines
 	 * @return list of entrant who was blocked
@@ -360,9 +376,10 @@ public class EntrantDAO extends AbstractDAO{
 
 		return entrants;
 	}
-	
+
 	/**
 	 * This method returns a list of blocked entrants with pagination
+	 * 
 	 * @param offset
 	 * @param lines
 	 * @return list of entrant who was blocked
@@ -390,5 +407,5 @@ public class EntrantDAO extends AbstractDAO{
 		}
 		return entrants;
 	}
-	
+
 }

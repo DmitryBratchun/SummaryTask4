@@ -19,6 +19,11 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
+/**
+ * Edit subject
+ * @author D.Bratchun
+ *
+ */
 public class EditSubjectsCommand extends Command{
 
 	private static final long serialVersionUID = 1674095436016740066L;
@@ -31,15 +36,15 @@ public class EditSubjectsCommand extends Command{
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet(request);
 		}
 		LOG.debug("Command finished");
 		return result;
 	}
 	
-	private String doGet(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	private String doGet(HttpServletRequest request) throws AppException {
 		List<Subject> subjects = null;
 		
 		String orderBy = request.getParameter("orederBy");
@@ -59,7 +64,7 @@ public class EditSubjectsCommand extends Command{
 		return Path.PAGE_LIST_ALL_SUBJECTS;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	private String doPost(HttpServletRequest request) throws AppException {
 		int subjectId = getDeliteSubjectsId(request, "subject");
 		try {
 			SubjectDAO subjectDAO = SubjectDAO.getInstance();
@@ -76,7 +81,7 @@ public class EditSubjectsCommand extends Command{
 		int subjectId = -1;
 		Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
-            String parameterName = (String) enumeration.nextElement();
+            String parameterName = enumeration.nextElement();
             if(parameterName.matches(parameter + "\\d+")) {
             	parameterName = parameterName.replaceAll("\\D", "");
             	subjectId = Integer.parseInt(parameterName);

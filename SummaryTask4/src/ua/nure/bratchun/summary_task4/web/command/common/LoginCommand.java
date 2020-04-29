@@ -37,18 +37,18 @@ public class LoginCommand extends Command {
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet();
 		}
 		LOG.debug("Command finished");
 		return result;
 	}
-	private String doGet(HttpServletRequest request, HttpServletResponse response) {
+	private String doGet() {
 		return Path.PAGE_LOGIN;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	private String doPost(HttpServletRequest request) throws AppException {
 
 		HttpSession session = request.getSession();
 

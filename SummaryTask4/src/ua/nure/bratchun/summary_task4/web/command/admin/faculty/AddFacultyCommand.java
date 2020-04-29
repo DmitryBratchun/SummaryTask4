@@ -21,7 +21,9 @@ import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.exception.DBException;
 import ua.nure.bratchun.summary_task4.exception.Messages;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 
 /**
  * Add faculty command
@@ -41,15 +43,15 @@ public class AddFacultyCommand extends Command{
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet(request);
 		}
 		LOG.debug("Command finished");
 		return result;
 	}
 	
-	private String doGet(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	private String doGet(HttpServletRequest request) throws AppException {
 		SubjectDAO subjectDAO;
 		List<Subject> diplomaSubjects = null;
 		try {
@@ -59,40 +61,40 @@ public class AddFacultyCommand extends Command{
 			LOG.error(Messages.ERR_CANNOT_GET_SUBJECTS, e);
 			throw new AppException(Messages.ERR_CANNOT_GET_SUBJECTS,e);
 		}
-		request.setAttribute("subjects", diplomaSubjects);
+		request.setAttribute(AttributeNames.SUBJECTS, diplomaSubjects);
 		
 		return Path.PAGE_ADD_FACULTY;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException{
+	private String doPost(HttpServletRequest request) throws AppException{
 		
-		String nameRu = request.getParameter("nameRu");
-		String nameEn = request.getParameter("nameEn");
+		String nameRu = request.getParameter(ParameterNames.NAME_RU);
+		String nameEn = request.getParameter(ParameterNames.NAME_EN);
 
-		if(request.getParameter("budgetPlaces").isEmpty() && request.getParameter("totalPlaces").isEmpty()) {			
-			request.getSession().setAttribute("addFacultyErrorMessage", "admin.faculties.add_faculty_jsp.error.incorrect_places");
+		if(request.getParameter(ParameterNames.BUDGET_PLACES).isEmpty() && request.getParameter(ParameterNames.TOTAL_PLACES).isEmpty()) {			
+			request.getSession().setAttribute(AttributeNames.ADD_FACULTY_ERROR_MESSAGE, "admin.faculties.add_faculty_jsp.error.incorrect_places");
 			return Path.COMMAND_ADD_FACULTY;
 		}
-			int budgetPlaces = Integer.parseInt(request.getParameter("budgetPlaces"));
-			int totalPlaces = Integer.parseInt(request.getParameter("totalPlaces"));
+			int budgetPlaces = Integer.parseInt(request.getParameter(ParameterNames.BUDGET_PLACES));
+			int totalPlaces = Integer.parseInt(request.getParameter(ParameterNames.TOTAL_PLACES));
 		
 		if(!FacultyValidation.validationNameEn(nameEn) || !FacultyValidation.validationNameRu(nameRu)) {
-			request.getSession().setAttribute("addFacultyErrorMessage", "admin.faculties.add_faculty_jsp.error.incorrect_name");
+			request.getSession().setAttribute(AttributeNames.ADD_FACULTY_ERROR_MESSAGE, "admin.faculties.add_faculty_jsp.error.incorrect_name");
 			return Path.COMMAND_ADD_FACULTY;
 		}
 		if(!FacultyValidation.validationPlaces(totalPlaces, budgetPlaces)) {
-			request.getSession().setAttribute("addFacultyErrorMessage", "admin.faculties.add_faculty_jsp.error.incorrect_places");
+			request.getSession().setAttribute(AttributeNames.ADD_FACULTY_ERROR_MESSAGE, "admin.faculties.add_faculty_jsp.error.incorrect_places");
 			return Path.COMMAND_ADD_FACULTY;
 		}
 		if(FacultyValidation.hasName(nameEn) || FacultyValidation.hasName(nameRu)) {
-			request.getSession().setAttribute("addFacultyErrorMessage", "admin.faculties.add_faculty_jsp.error.no_unique_name");
+			request.getSession().setAttribute(AttributeNames.ADD_FACULTY_ERROR_MESSAGE, "admin.faculties.add_faculty_jsp.error.no_unique_name");
 			return Path.COMMAND_ADD_FACULTY;
 		}
 		Faculty faculty = new Faculty(nameRu, nameEn, totalPlaces, budgetPlaces);
 		try {
 			FacultyDAO facultyDAO = FacultyDAO.getInstance();
 			facultyDAO.insert(faculty);
-			facultyDAO.addAllPriliminaryByFacultyId(faculty.getId(), getNewPreliminarySubjectsId(request, "preliminary"));
+			facultyDAO.addAllPriliminaryByFacultyId(faculty.getId(), getNewPreliminarySubjectsId(request, ParameterNames.PRELIMINARY));
 		} catch (DBException e) {
 			LOG.error(Messages.ERR_CANNOT_INSERT_FACULTY, e);
 			throw new AppException(Messages.ERR_CANNOT_INSERT_FACULTY, e);

@@ -11,6 +11,11 @@ import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
+/**
+ * View error page
+ * @author D.Bratchun
+ *
+ */
 public class ViewErrorCommand extends Command{
 
 	private static final long serialVersionUID = -3695555195703848425L;

@@ -1,9 +1,12 @@
 package ua.nure.bratchun.summary_task4.exception;
 
+/**
+ * Application exception
+ * @author D.Bratchun
+ *
+ */
 public class AppException  extends Exception{
-	/**
-	 * @author D.Bratchun
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public AppException() {

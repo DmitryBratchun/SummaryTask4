@@ -1,6 +1,7 @@
 package ua.nure.bratchun.summary_task4.web.command.admin.entrant;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,10 @@ import ua.nure.bratchun.summary_task4.db.dao.EntrantDAO;
 import ua.nure.bratchun.summary_task4.db.entity.Entrant;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
+
 /**
  * View all blocked entrants
  * @author D.Bratchun
@@ -34,25 +38,24 @@ public class ViewBlockedEntrants extends Command{
 		if(method == HttpMethod.POST) {
 			result = null;
 		} else {
-			result = doGet(request, response);
+			result = doGet(request);
 		}
 		LOG.debug("Command finished");
 		return result;
 	}
 
-	private String doGet(HttpServletRequest request, HttpServletResponse response) throws AppException {
-		String result = Path.PAGE_ERROR;
+	private String doGet(HttpServletRequest request) throws AppException {
 			// pagination
 			int page = 1;
 			int lines = 10;
-			if (request.getParameter("page") != null) {
-				page = Integer.parseInt(request.getParameter("page").replace("/D", ""));
+			if (request.getParameter(ParameterNames.PAGINATION_PAGE) != null) {
+				page = Integer.parseInt(request.getParameter(ParameterNames.PAGINATION_PAGE).replace("/D", ""));
 			}
 			if (page < 1) {
 				page = 1;
 			}
-			if (request.getParameter("lines") != null) {
-				lines = Integer.parseInt(request.getParameter("lines").replace("/D", ""));
+			if (request.getParameter(ParameterNames.PAGINATION_LINES) != null) {
+				lines = Integer.parseInt(request.getParameter(ParameterNames.PAGINATION_LINES).replace("/D", ""));
 			}
 			if (lines < 1) {
 				lines = 10;
@@ -63,11 +66,10 @@ public class ViewBlockedEntrants extends Command{
 				page--;
 				entrants = entrantDAO.findAllBlocked((page - 1) * lines, lines);
 			}
-			request.setAttribute("lines", lines);
-			request.setAttribute("page", page);
-			request.setAttribute("entrants", entrants);
+			request.setAttribute(AttributeNames.PAGINATION_LINES, lines);
+			request.setAttribute(AttributeNames.PAGINATION_PAGE, page);
+			request.setAttribute(AttributeNames.ENTRANTS, entrants);
 
-			result = Path.PAGE_VIEW_BLOCKED_ENTRANTS;
-			return result;
+			return Path.PAGE_VIEW_BLOCKED_ENTRANTS;
 	}
 }

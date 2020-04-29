@@ -17,10 +17,12 @@ import ua.nure.bratchun.summary_task4.db.validation.UserValidation;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.exception.DBException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
 /**
  * This command use for registration new client
+ * @author D.Bratchun
  */
 public class CommandRegistrationClient extends Command{
 	
@@ -35,19 +37,19 @@ public class CommandRegistrationClient extends Command{
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet();
 		}
 		LOG.debug("Finished executing Command");
 		return result;
 	}
 
-	private String doGet(HttpServletRequest request, HttpServletResponse response) {
+	private String doGet() {
 		return Path.PAGE_CLIENT_REGISRTATION;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws DBException {
+	private String doPost(HttpServletRequest request) throws DBException {
 
 		String login = request.getParameter(Fields.USER_LOGIN);
 		String password = request.getParameter(Fields.USER_PASSWORD);
@@ -60,17 +62,17 @@ public class CommandRegistrationClient extends Command{
 		String lang = request.getParameter(Fields.USER_LANG);
 		
 		if(!UserValidation.validationFields(login, password, firstName, lastName, email, lang)) {
-			request.getSession().setAttribute("registrationErrorMessage", "registration_jsp.error.incorrect_form");
+			request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR_MESSAGE, "registration_jsp.error.incorrect_form");
 			return Path.COMMAND_VIEW_REGISTRATION_PAGE;
 		}
 		
 		if(!UserValidation.validationLogin(login)) {
-			request.getSession().setAttribute("registrationErrorMessage", "registration_jsp.error.no_uniq_login");
+			request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR_MESSAGE, "registration_jsp.error.no_uniq_login");
 			return Path.COMMAND_VIEW_REGISTRATION_PAGE;
 		}
 		
 		if(!UserValidation.checkUniquenessEmail(email)) {
-			request.getSession().setAttribute("registrationErrorMessage", "registration_jsp.error.no_uniq_email");
+			request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR_MESSAGE, "registration_jsp.error.no_uniq_email");
 			return Path.COMMAND_VIEW_REGISTRATION_PAGE;
 		}
 		

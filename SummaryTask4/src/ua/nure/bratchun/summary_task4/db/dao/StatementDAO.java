@@ -26,6 +26,7 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
  */
 public class StatementDAO extends AbstractDAO {
 
+	// singleton variable
 	private static StatementDAO instance;
 
 	private static final String SQL_ADD_APPLICATION_TO_STATEMENT = "INSERT INTO statement (entrant_id, faculty_id, diploma_score, preliminary_score, entry_type_id) VALUES (?,?,?,?,?)";
@@ -52,17 +53,28 @@ public class StatementDAO extends AbstractDAO {
 
 	private static final Logger LOG = Logger.getLogger(StatementDAO.class);
 	
-	// standard constructor
+	/**
+	 * standard constructor
+	 * @throws DBException
+	 */
 	private StatementDAO() throws DBException {
 		super();
 	}
 	
-	// constructor constructor with the option not to use JNDI for Junit
+	/**
+	 * constructor constructor with the option not to use JNDI for Junit
+	 * @param isUseJNDI
+	 * @throws DBException
+	 */
 	private StatementDAO(boolean isUseJNDI) throws DBException {
 		super(isUseJNDI);
 	}
 
-	// singleton pattern
+	/**
+	 * singleton pattern
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized StatementDAO getInstance() throws DBException {
 		if (instance == null) {
 			instance = new StatementDAO();
@@ -70,7 +82,12 @@ public class StatementDAO extends AbstractDAO {
 		return instance;
 	}
 	
-	// singleton pattern with use constructor with the option not to use JNDI for Junit 
+	/**
+	 * singleton pattern with use constructor with the option not to use JNDI for Junit 
+	 * @param isUseJNDI
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized StatementDAO getInstance(boolean isUseJNDI) throws DBException {
 		if (instance == null) {
 			instance = new StatementDAO(isUseJNDI);

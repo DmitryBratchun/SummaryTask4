@@ -8,6 +8,9 @@ package ua.nure.bratchun.summary_task4;
  */
 public final class Path {
 	
+	/**
+	 * Private utility class constructor
+	 */
 	private Path(){}
 	
 	// pages

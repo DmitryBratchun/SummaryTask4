@@ -36,7 +36,9 @@ public class GradeDAO extends AbstractDAO {
 	public static final String SQL_HAS_GRADES_BY_FACULTY_AND_ENTRANT_ID = "SELECT entrant_id, faculty_id FROM grades WHERE entrant_id=? "
 			+ "AND faculty_id=? GROUP BY entrant_id";
 	
-	// standard constructor
+	/**
+	 * standard constructor
+	 */
 	private GradeDAO() throws DBException {
 		super();
 	}
@@ -62,7 +64,11 @@ public class GradeDAO extends AbstractDAO {
 		return grade;
 	}
 	
-	// singleton pattern with use constructor with the option not to use JNDI for Junit 
+	/**
+	 * singleton pattern with use constructor with the option not to use JNDI for Junit 
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized GradeDAO getInstance() throws DBException {
 		if (instance == null) {
 			instance = new GradeDAO();
@@ -70,7 +76,12 @@ public class GradeDAO extends AbstractDAO {
 		return instance;
 	}
 	
-	// singleton
+	/**
+	 * singleton
+	 * @param isUseJNDI
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized GradeDAO getInstance(boolean isUseJNDI) throws DBException {
 		if (instance == null) {
 			instance = new GradeDAO(isUseJNDI);

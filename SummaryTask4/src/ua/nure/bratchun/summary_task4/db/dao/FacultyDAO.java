@@ -36,17 +36,28 @@ public class FacultyDAO extends AbstractDAO {
 	
 	private static FacultyDAO instance;
 	
-	// standard constructor
+	/**
+	 * standard constructor
+	 * @throws DBException
+	 */
 	private FacultyDAO() throws DBException {
 		super();
 	}
 	
-	// constructor without JNDI for Junit
+	/**
+	 * constructor without JNDI for Junit
+	 * @param isUseJNDI
+	 * @throws DBException
+	 */
 	private FacultyDAO(boolean isUseJNDI) throws DBException {
 		super(isUseJNDI);
 	}
 	
-	// singleton pattern
+	/**
+	 * singleton pattern
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized FacultyDAO getInstance() throws DBException{
 		if(instance == null) {
 			instance = new FacultyDAO();
@@ -54,7 +65,12 @@ public class FacultyDAO extends AbstractDAO {
 		return instance;
 	}
 	
-	// singleton pattern witch use constructor without JUNDI for Junit
+	/**
+	 * singleton pattern witch use constructor without JUNDI for Junit
+	 * @param isUseJNDI
+	 * @return
+	 * @throws DBException
+	 */
 	public static synchronized FacultyDAO getInstance(boolean isUseJNDI) throws DBException{
 		if(instance == null) {
 			instance = new FacultyDAO(isUseJNDI);

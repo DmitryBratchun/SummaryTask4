@@ -8,6 +8,12 @@ import ua.nure.bratchun.summary_task4.exception.DBException;
 import ua.nure.bratchun.summary_task4.exception.Messages;
 
 public class SubjectValidation {
+	
+	/**
+	 * Private utility class constructor
+	 */
+	private SubjectValidation() {}
+	
 	private static final Logger LOG = Logger.getLogger(SubjectValidation.class);
 
 	public static final String REGULAR_EXPRESSION_NAME_EN = "[A-Za-z0-9\\s]+";

@@ -2,9 +2,8 @@ package ua.nure.bratchun.summary_task4.web.filter;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.servlet.Filter;
@@ -33,9 +32,9 @@ public class CommandAccessFilter implements Filter {
 	private static final Logger LOG = Logger.getLogger(CommandAccessFilter.class);
 
 	// commands access	
-	private Map<Role, List<String>> accessMap = new HashMap<Role, List<String>>();
-	private List<String> commons = new ArrayList<String>();	
-	private List<String> outOfControl = new ArrayList<String>();
+	private EnumMap<Role, List<String>> accessMap = new EnumMap<>(Role.class);
+	private List<String> commons = new ArrayList<>();	
+	private List<String> outOfControl = new ArrayList<>();
 	
 	@Override
 	public void destroy() {
@@ -118,7 +117,7 @@ public class CommandAccessFilter implements Filter {
 	 * @return list of parameter values.
 	 */
 	private List<String> asList(String str) {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		StringTokenizer st = new StringTokenizer(str);
 		while (st.hasMoreTokens()) {
 			list.add(st.nextToken());

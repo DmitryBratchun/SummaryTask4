@@ -36,7 +36,7 @@ class GradeDAOTest {
 		BasicConfigurator.configure();
 		
 		entrant = new Entrant();
-		entrant.setFirstName("testuser");
+		entrant.setFirstName("testusername");
 		entrant.setLogin("testuser");
 		entrant.setLastName("testuser");
 		entrant.setEmail("testuser@gmail.com");

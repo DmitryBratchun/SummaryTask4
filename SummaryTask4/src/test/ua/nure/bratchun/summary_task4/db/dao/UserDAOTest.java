@@ -23,10 +23,10 @@ class UserDAOTest {
 	private static UserDAO userDAO;
 
 	@BeforeAll
-	public static void setUpClass() throws Exception {
+	public static void setUpClass() throws DBException  {
 		BasicConfigurator.configure();
 		user = new User();
-		user.setFirstName("testuser");
+		user.setFirstName("testusername");
 		user.setLogin("testuser");
 		user.setLastName("testuser");
 		user.setEmail("testuser@gmail.com");
@@ -44,12 +44,8 @@ class UserDAOTest {
 	}
 	
 	@Test
-	public void testFindByEmail() {
-		try {
-			assertThat(userDAO.findByEmail(user.getEmail()).getLogin(), equalTo(user.getLogin()));
-		} catch (DBException e) {
-			e.printStackTrace();
-		}
+	public void testFindByEmail() throws DBException {
+		assertThat(userDAO.findByEmail(user.getEmail()).getLogin(), equalTo(user.getLogin()));
 	}
 	
 	@Test
@@ -63,14 +59,10 @@ class UserDAOTest {
 	}
 	
 	@Test
-	public void testUpdate() {
+	public void testUpdate() throws DBException {
 		user.setEmail("update@gmail.com");
-		try {
-			userDAO.update(user);
-			assertTrue(userDAO.hasLogin(user.getLogin()));
-		} catch (DBException e) {
-			e.printStackTrace();
-		}
+		userDAO.update(user);
+		assertTrue(userDAO.hasLogin(user.getLogin()));
 	}
 	@Test
 	public void testGetIdByLogin() throws DBException {
@@ -84,7 +76,7 @@ class UserDAOTest {
 	@Test
 	public void testDelete() throws DBException {
 		User userDelete = new User();
-		userDelete.setFirstName("testDeleteUser");
+		userDelete.setFirstName("testDeleteUserName");
 		userDelete.setLogin("testDeleteUser");
 		userDelete.setLastName("testDeleteUser");
 		userDelete.setEmail("testdeleteuser@gmail.com");

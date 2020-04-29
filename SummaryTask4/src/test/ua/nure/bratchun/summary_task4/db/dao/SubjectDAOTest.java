@@ -18,7 +18,7 @@ class SubjectDAOTest {
 	private static Subject subject;
 	
 	@BeforeAll
-	public static void setUpClass() throws Exception {
+	public static void setUpClass() throws DBException {
 		BasicConfigurator.configure();
 		subjectDAO = SubjectDAO.getInstance(false);
 		subject = new Subject();

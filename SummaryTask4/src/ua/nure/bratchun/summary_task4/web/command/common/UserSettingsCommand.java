@@ -16,8 +16,15 @@ import ua.nure.bratchun.summary_task4.db.validation.UserValidation;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.exception.DBException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 
+/**
+ * User settings
+ * @author D.Bratchun
+ *
+ */
 public class UserSettingsCommand extends Command{
 
 	private static final long serialVersionUID = -6336511588952034804L;
@@ -30,42 +37,42 @@ public class UserSettingsCommand extends Command{
 		LOG.debug("Start executing Command");
 		String result = null;
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
-			result = doGet(request, response);
+			result = doGet();
 		}
 		LOG.debug("Finished executing Command");
 		return result;
 	}
 	
-	private String doGet(HttpServletRequest request, HttpServletResponse response) {
+	private String doGet() {
 		return Path.PAGE_USER_SETTINGS;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws DBException {
+	private String doPost(HttpServletRequest request) throws DBException {
 		String result = null;
 		
 		HttpSession session = request.getSession();
 		User user = null;
 		UserDAO userDAO = UserDAO.getInstance(); 
-		String newPassword = request.getParameter("new_password");
-		String newEmail = request.getParameter("new_email");
-		String newLand = request.getParameter("lang");
+		String newPassword = request.getParameter(ParameterNames.NEW_PASSWORD);
+		String newEmail = request.getParameter(ParameterNames.NEW_EMAIL);
+		String newLand = request.getParameter(ParameterNames.LANG);
 		LOG.debug("User try to change his password to (" + newPassword + ") and email to (" + newEmail + ")");
-		if((user=(User) session.getAttribute("user")) == null) {
+		if((user=(User) session.getAttribute(AttributeNames.USER)) == null) {
 			return Path.COMMAND_VIEW_LOGIN_PAGE;
 		}
 		if(!newPassword.isEmpty() && newPassword.length() < 2) {
-			session.setAttribute("userSettingsErrorMessage", "user.settings_jsp.error.incorrect_password");
+			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "user.settings_jsp.error.incorrect_password");
 			return Path.COMMAND_SETTINGS_USER;
 		}
 		
 		if(!newEmail.isEmpty() && !UserValidation.validationEmail(newEmail)) {
-			session.setAttribute("userSettingsErrorMessage", "user.settings_jsp.error.incorrect_email");
+			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "user.settings_jsp.error.incorrect_email");
 			return Path.COMMAND_SETTINGS_USER;
 		}
 		if(!newEmail.isEmpty() && userDAO.hasEmail(newEmail)) {
-			session.setAttribute("userSettingsErrorMessage", "user.settings_jsp.error.no_uniq_email");
+			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "user.settings_jsp.error.no_uniq_email");
 			return Path.COMMAND_SETTINGS_USER;
 		}
 		if(!newEmail.isEmpty()) {

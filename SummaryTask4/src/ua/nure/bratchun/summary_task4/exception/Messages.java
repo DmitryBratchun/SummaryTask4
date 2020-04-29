@@ -1,5 +1,10 @@
 package ua.nure.bratchun.summary_task4.exception;
 
+/**
+ * Error message
+ * @author D.Bratchun
+ *
+ */
 public class Messages {
 	
 	private Messages() {}

@@ -17,7 +17,9 @@ import ua.nure.bratchun.summary_task4.db.entity.Application;
 import ua.nure.bratchun.summary_task4.db.entity.Faculty;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 import ua.nure.bratchun.summary_task4.web.mail.Sender;
 
 /**
@@ -40,7 +42,7 @@ public class FileStatementCommand extends Command {
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
 			result = null;
 		}
@@ -48,11 +50,11 @@ public class FileStatementCommand extends Command {
 		return result;
 	}
 	
-	public String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	public String doPost(HttpServletRequest request) throws AppException {
 		StatementDAO statementDAO = StatementDAO.getInstance();
-		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+		int facultyId = Integer.parseInt(request.getParameter(ParameterNames.FACULTY_ID));
 		if(statementDAO.hasStatementResult(facultyId)) {
-			return Path.COMMAND_VIEW_STATEMENT + "&facultyId=" + facultyId;
+			return Path.COMMAND_VIEW_STATEMENT + "&" + AttributeNames.FACULTY_ID + "=" + facultyId;
 		}
 		
 		FacultyDAO facultyDAO = FacultyDAO.getInstance();
@@ -106,13 +108,20 @@ public class FileStatementCommand extends Command {
 		}
 	}
 	
+	/**
+	 * Send message with result to users by English
+	 * @param application
+	 * @throws AppException
+	 */
 	private static void reportResultEn(Application application) throws AppException {
 		String title = "Admission results";
-		String email = application.getEmail();
 		FacultyDAO facultyDAO = FacultyDAO.getInstance();
 		Faculty faculty = facultyDAO.findById(application.getFacultyId());
 		String facultyName = faculty.getNameEn();
-		String fullName = application.getFirstName() + " " + application.getLastName();
+		
+		String fullName;
+		String email;
+		
 		String entryType = null;
 		email = application.getEmail();
 		fullName = application.getFirstName() + " " + application.getLastName();
@@ -138,13 +147,20 @@ public class FileStatementCommand extends Command {
 		sender.send(title, text, ADMISSIONS_EMAIL, email);
 	}
 	
+	/**
+	 * Send message with result to users by Russian
+	 * @param application
+	 * @throws AppException
+	 */
 	private static void reportResultRu(Application application) throws AppException {
 		String title = "Результаты вступительной компании";
-		String email = application.getEmail();
 		FacultyDAO facultyDAO = FacultyDAO.getInstance();
 		Faculty faculty = facultyDAO.findById(application.getFacultyId());
 		String facultyName = faculty.getNameRu();
-		String fullName = application.getFirstName() + " " + application.getLastName();
+		
+		String fullName;
+		String email;
+		
 		String entryType = null;
 		email = application.getEmail();
 		fullName = application.getFirstName() + " " + application.getLastName();

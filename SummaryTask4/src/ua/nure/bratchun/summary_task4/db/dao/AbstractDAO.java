@@ -25,13 +25,18 @@ import ua.nure.bratchun.summary_task4.exception.Messages;
  *
  */
 public abstract class AbstractDAO {
+	
+	// Use JNDI flag
 	protected boolean isUseJNDI;
+	
 	public boolean isUseJNDI() {
 		return isUseJNDI;
 	}
+	
 	public void setUseJNDI(boolean isUseJNDI) {
 		this.isUseJNDI = isUseJNDI;
 	}
+	
 	private static final Logger LOG = Logger.getLogger(AbstractDAO.class);
 	
 	protected DataSource ds;

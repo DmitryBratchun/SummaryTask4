@@ -1,6 +1,10 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
-
+/**
+ * Client user, entrant
+ * @author brath
+ *
+ */
 public class Entrant extends User{
 	
 	private static final long serialVersionUID = -7973524321960481376L;

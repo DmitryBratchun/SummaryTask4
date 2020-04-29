@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * Custom tag class 
+ * Custom tag class with create footer text
  * @author D.Bratchun
  *
  */

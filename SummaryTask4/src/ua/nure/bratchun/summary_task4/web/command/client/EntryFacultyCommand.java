@@ -18,8 +18,15 @@ import ua.nure.bratchun.summary_task4.db.entity.Grade;
 import ua.nure.bratchun.summary_task4.db.entity.User;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 
+/**
+ * Entry faculty
+ * @author D.Bratchun
+ *
+ */
 public class EntryFacultyCommand extends Command{
 	
 	private static final long serialVersionUID = -1612401430741620434L;
@@ -32,7 +39,7 @@ public class EntryFacultyCommand extends Command{
 		String result = null;
 		
 		if(method == HttpMethod.POST) {
-			result = doPost(request, response);
+			result = doPost(request);
 		} else {
 			result = null;
 		}
@@ -40,34 +47,34 @@ public class EntryFacultyCommand extends Command{
 		return result;
 	}
 	
-	private String doPost(HttpServletRequest request, HttpServletResponse response) throws AppException {
-		User user = (User) request.getSession().getAttribute("user");
+	private String doPost(HttpServletRequest request) throws AppException {
+		User user = (User) request.getSession().getAttribute(AttributeNames.USER);
 		int entrantId = user.getId();
-		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+		int facultyId = Integer.parseInt(request.getParameter(ParameterNames.FACULTY_ID));
 		
 		GradeDAO gradeDAO = GradeDAO.getInstance();
 		if(gradeDAO.hasGrades(facultyId, entrantId)) {
-			request.getSession().setAttribute("entryFacultyErrorMessage", "client.entry.entry_faculty_jsp.already_registered");
-			return Path.COMMAND_VIEW_FACULTY + "&facultyId=" + facultyId;
+			request.getSession().setAttribute(AttributeNames.ENTRY_FACULTY_ERROR_MESSAGE, "client.entry.entry_faculty_jsp.already_registered");
+			return Path.COMMAND_VIEW_FACULTY + "&"+ AttributeNames.FACULTY_ID+"=" + facultyId;
 		}
 		
 		
 		// Parse all subjects id
 		LOG.debug(user.getLogin() + " try to registration for entry diploma subjects" + 
-				request.getParameter("diplomaSubjects"));
-		List<Integer>diplomaSubjectsId = getSubjectsIdByParameter(request, "diploma");
+				request.getParameter(ParameterNames.DIPLOMA_SUBJECTS));
+		List<Integer>diplomaSubjectsId = getSubjectsIdByParameter(request, ParameterNames.DIPLOMA);
 		
 		LOG.debug(user.getLogin() + " try to registration for entry preliminary subjects " + 
-				request.getParameter("preliminarySubjects"));
-		List<Integer>preliminarySubjectsId = getSubjectsIdByParameter(request, "preliminary");
+				request.getParameter(ParameterNames.PRELIMINARY_SUBJECTS));
+		List<Integer>preliminarySubjectsId = getSubjectsIdByParameter(request, ParameterNames.PRELIMINARY);
 		// Validate form filling
 		if(!validateEntryForm(diplomaSubjectsId, preliminarySubjectsId, request)) {
-			request.getSession().setAttribute("entryFacultyErrorMessage", "client.entry.entry_faculty_jsp.incorrectInput");
-			return Path.COMMAND_VIEW_FACULTY + "&facultyId=" + facultyId;
+			request.getSession().setAttribute(AttributeNames.ENTRY_FACULTY_ERROR_MESSAGE, "client.entry.entry_faculty_jsp.incorrectInput");
+			return Path.COMMAND_VIEW_FACULTY + "&"+ AttributeNames.FACULTY_ID +"=" + facultyId;
 		}
-		if(!validateUnicueEntry(facultyId, entrantId)) {
-			request.getSession().setAttribute("entryFacultyErrorMessage", "client.entry.entry_faculty_jsp.already_registered");
-			return Path.COMMAND_VIEW_FACULTY + "&facultyId=" + facultyId;
+		if(!validateUniqueEntry(facultyId, entrantId)) {
+			request.getSession().setAttribute(AttributeNames.ENTRY_FACULTY_ERROR_MESSAGE, "client.entry.entry_faculty_jsp.already_registered");
+			return Path.COMMAND_VIEW_FACULTY + "&"+ AttributeNames.FACULTY_ID +"=" + facultyId;
 		}
 		// Compose all grades
 		List<Grade> grades = composeGrades(diplomaSubjectsId, preliminarySubjectsId, entrantId, facultyId, request);
@@ -109,26 +116,33 @@ public class EntryFacultyCommand extends Command{
 		
 		int grade = 0;
 		for(int id : diplomaSubjectsId) {
-			if(request.getParameter("diploma" + id) == null || request.getParameter("diploma" + id).isEmpty()) {
+			if(request.getParameter(ParameterNames.DIPLOMA + id) == null || request.getParameter(ParameterNames.DIPLOMA + id).isEmpty()) {
 				return false;
 			}
-			grade = Integer.parseInt(request.getParameter("diploma" + id));
+			grade = Integer.parseInt(request.getParameter(ParameterNames.DIPLOMA + id));
 			if(grade < 1 || grade > 12) {
 				return false;
 			}
 		}
 		for(int id : preliminarySubjectsId) {
-			if(request.getParameter("preliminary" + id) == null || request.getParameter("preliminary" + id).isEmpty()) {
+			if(request.getParameter(ParameterNames.PRELIMINARY + id) == null || request.getParameter(ParameterNames.PRELIMINARY + id).isEmpty()) {
 				return false;
 			}
-			grade = Integer.parseInt(request.getParameter("preliminary" + id));
+			grade = Integer.parseInt(request.getParameter(ParameterNames.PRELIMINARY + id));
 			if(grade < 1 || grade > 12) {
 				return false;
 			}
 		}
 		return true;	
 	}
-	private boolean validateUnicueEntry(int facultyId, int entrantId) throws AppException {
+	/**
+	 * Check if unique entry
+	 * @param facultyId
+	 * @param entrantId
+	 * @return
+	 * @throws AppException
+	 */
+	private boolean validateUniqueEntry(int facultyId, int entrantId) throws AppException {
 		boolean result = false;
 		if(!GradeDAO.getInstance().hasGrades(facultyId, entrantId)) {
 			result = true;
@@ -152,13 +166,13 @@ public class EntryFacultyCommand extends Command{
 		int value = 0;
 		
 		for(int id : diplomaSubjectsId) {
-			value = Integer.parseInt(request.getParameter("diploma" + id));
+			value = Integer.parseInt(request.getParameter(ParameterNames.DIPLOMA + id));
 			grades.add(new Grade(entrantId, facultyId, id, value, ExamType.DIPLOMA.ordinal()));
 			
 			
 		}
 		for(int id : preliminarySubjectsId) {
-			value = Integer.parseInt(request.getParameter("preliminary" + id));
+			value = Integer.parseInt(request.getParameter(ParameterNames.PRELIMINARY + id));
 			grades.add(new Grade(entrantId, facultyId, id, value, ExamType.PRELIMINARY.ordinal()));
 		}
 		return grades;

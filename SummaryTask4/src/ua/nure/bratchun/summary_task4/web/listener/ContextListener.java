@@ -8,11 +8,16 @@ import javax.servlet.ServletContextListener;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-
+/**
+ * Context listener
+ * @author D.Bratchun
+ *
+ */
 public class ContextListener implements ServletContextListener {
 
 	private static final Logger LOG = Logger.getLogger(ContextListener.class);
 
+	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		log("Servlet context destruction starts");
 		//
