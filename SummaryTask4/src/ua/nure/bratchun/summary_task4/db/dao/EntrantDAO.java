@@ -96,7 +96,7 @@ public class EntrantDAO extends AbstractDAO {
 		return instance;
 	}
 
-	// singleton pattern use constructor without JUNDI for Junit
+	// singleton pattern use constructor without JNDI for Junit
 	public static synchronized EntrantDAO getInstance(boolean isUseJNDI) throws DBException {
 		if (instance == null) {
 			instance = new EntrantDAO(isUseJNDI);

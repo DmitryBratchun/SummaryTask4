@@ -69,7 +69,7 @@ public class AddSubjectCommand extends Command{
 			throw new AppException(Messages.ERR_CANNOT_INSERT_SUBJECT, e);
 		}
 		
-		return Path.COMMAND_VIEW_PAGE_ADMIN;
+		return Path.COMMAND_LIST_SUBJECTS;
 	}
 	
 

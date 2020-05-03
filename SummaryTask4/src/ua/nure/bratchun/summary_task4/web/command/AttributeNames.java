@@ -29,11 +29,13 @@ public class AttributeNames {
 	public static final String DIPLOMA_SUBJECTS  = "diplomaSubjects";
 	public static final String PRELIMINARY_SUBJECTS  = "preliminarySubjects";
 	
+	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String REGISTRATION_ERROR_MESSAGE = "registrationErrorMessage";
 	public static final String ENTRY_FACULTY_ERROR_MESSAGE = "entryFacultyErrorMessage";
 	public static final String ADD_FACULTY_ERROR_MESSAGE = "addFacultyErrorMessage";
 	public static final String EDIT_FACULTY_ERROR_MESSAGE = "editFacultyErrorMessage";
 	public static final String USER_SETTINGS_ERROR_MESSAGE = "userSettingsErrorMessage";
+	public static final String LOGIN_ERROR_MESSAGE = "loginErrorMessage";
 	
 	public static final String COMMAND = "command";
 	

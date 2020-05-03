@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import ua.nure.bratchun.summary_task4.Path;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
 /**
@@ -26,8 +27,8 @@ public class LogoutCommand extends Command{
 			throws IOException, ServletException, AppException {
 		
 		HttpSession session= request.getSession();
-		session.removeAttribute("user");
-		session.removeAttribute("userRole");
+		session.removeAttribute(AttributeNames.USER);
+		session.removeAttribute(AttributeNames.USER_ROLE);
 		
 		return Path.PAGE_LOGIN;
 	}

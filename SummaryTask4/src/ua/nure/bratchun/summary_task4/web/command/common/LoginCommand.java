@@ -15,7 +15,9 @@ import ua.nure.bratchun.summary_task4.db.dao.UserDAO;
 import ua.nure.bratchun.summary_task4.db.entity.User;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 
 
 /**
@@ -54,12 +56,12 @@ public class LoginCommand extends Command {
 
 		// obtain login and password from a request
 		UserDAO userDAO = UserDAO.getInstance();
-		String login = request.getParameter("login");
+		String login = request.getParameter(ParameterNames.LOGIN);
 		LOG.trace("Request parameter: login --> " + login);
 
-		String password = request.getParameter("password");
+		String password = request.getParameter(ParameterNames.PASSWORD);
 		if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-			request.getSession().setAttribute("loginErrorMessage", "login_jsp.error.empty_form");
+			request.getSession().setAttribute(AttributeNames.LOGIN_ERROR_MESSAGE, "login_jsp.error.empty_form");
 			return Path.COMMAND_VIEW_LOGIN_PAGE;
 		}
 
@@ -67,7 +69,7 @@ public class LoginCommand extends Command {
 		LOG.trace("Found in DB: user --> " + user);
 
 		if (user == null || !password.equals(user.getPassword())) {
-			request.getSession().setAttribute("loginErrorMessage", "login_jsp.error.not_found");
+			request.getSession().setAttribute(AttributeNames.LOGIN_ERROR_MESSAGE, "login_jsp.error.not_found");
 			return Path.COMMAND_VIEW_LOGIN_PAGE;
 		}
 
@@ -76,10 +78,10 @@ public class LoginCommand extends Command {
 		
 		String result = Path.COMMAND_LIST_FACULTY;
 
-		session.setAttribute("user", user);
+		session.setAttribute(AttributeNames.USER, user);
 		LOG.trace("Set the session attribute: user --> " + user);
 
-		session.setAttribute("userRole", userRole);
+		session.setAttribute(AttributeNames.USER_ROLE, userRole);
 		LOG.trace("Set the session attribute: userRole --> " + userRole);
 
 		LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());

@@ -46,5 +46,6 @@ public final class Path {
 	public static final String COMMAND_BLOCK_ENTRANT = "controller?command=blockEntrant";
 	public static final String COMMAND_VIEW_STATEMENT = "controller?command=viewStatement";
 	public static final String COMMAND_VIEW_BLOCKED_ENTRANTS = "controller?command=viewBlockedEntrants";
+	public static final String COMMAND_EDIT_FACULTY = "controller?command=editFaculty";
 
 }

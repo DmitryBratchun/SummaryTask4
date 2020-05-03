@@ -1,8 +1,8 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
 /**
- * Client user, entrant
- * @author brath
+ * Entrant class client extending User. Stores user information, city, school, etc.
+ * @author D.Bratchun
  *
  */
 public class Entrant extends User{

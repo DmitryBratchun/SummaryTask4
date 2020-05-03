@@ -50,7 +50,7 @@ public class FileStatementCommand extends Command {
 		return result;
 	}
 	
-	public String doPost(HttpServletRequest request) throws AppException {
+	private String doPost(HttpServletRequest request) throws AppException {
 		StatementDAO statementDAO = StatementDAO.getInstance();
 		int facultyId = Integer.parseInt(request.getParameter(ParameterNames.FACULTY_ID));
 		if(statementDAO.hasStatementResult(facultyId)) {

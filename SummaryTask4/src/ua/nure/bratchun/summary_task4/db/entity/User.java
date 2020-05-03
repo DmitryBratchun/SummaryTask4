@@ -1,13 +1,22 @@
 package ua.nure.bratchun.summary_task4.db.entity;
 
 /**
- * User
+ * Application user has basic fields, such as password, login, email, full name.
  * @author D.Bratchun
  *
  */
 public class User extends Entity{
-
+	
 	private static final long serialVersionUID = -8402369682289356425L;
+	
+	private String login;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String lang;
+	private int roleId;
+	
 	public String getLogin() {
 		return login;
 	}
@@ -110,11 +119,5 @@ public class User extends Entity{
 	}
 
 
-	private String login;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String lang;
-	private int roleId;
+
 }

@@ -84,11 +84,7 @@ public class UserSettingsCommand extends Command{
 		user.setLang(newLand);
 		userDAO.update(user);
 		
-		if(user.getRoleId() == 0) {
-			result = Path.COMMAND_VIEW_PAGE_ADMIN;
-		} else {
-			result = Path.COMMAND_VIEW_PAGE_CLIENT;
-		}
+		result = Path.COMMAND_LIST_FACULTY;
 		
 		return result;
 	}

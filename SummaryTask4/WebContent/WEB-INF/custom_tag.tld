@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_1.xsd">
 	<tlib-version>1.0</tlib-version>
-	<short-name>seostella</short-name>
-	<uri>/WEB-INF/helloworldTag</uri>
+	<short-name>CustomTag</short-name>
+	<uri>/WEB-INF/custom_tag</uri>
 	<tag>
 		<name>footer</name>
-		<tag-class>ua.nure.bratchun.summary_task4.CustomTag</tag-class>
+		<tag-class>ua.nure.bratchun.summary_task4.CreateFooterTextTag</tag-class>
 		<body-content>empty</body-content>
 		<info>footer</info>
 	</tag>

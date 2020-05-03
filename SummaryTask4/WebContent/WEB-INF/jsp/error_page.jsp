@@ -14,7 +14,7 @@
 			</tr>
 		</c:if>
 		<tr style="vertical-align: text-top;">
-			<th><h3><fmt:message key="error_page_jsp.standart_error_message" /></h3></th>
+			<td class="content"><h3><fmt:message key="error_page_jsp.standart_error_message" /></h3></td>
 		</tr>
 		<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 	</table>

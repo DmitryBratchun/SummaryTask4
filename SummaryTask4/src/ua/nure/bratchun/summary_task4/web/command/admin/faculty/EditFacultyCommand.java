@@ -133,7 +133,7 @@ public class EditFacultyCommand extends Command {
 		if (FacultyValidation.hasName(newNameEn) || FacultyValidation.hasName(newNameRu)) {
 			request.getSession().setAttribute(AttributeNames.EDIT_FACULTY_ERROR_MESSAGE,
 					"admin.faculties.edit_faculty_jsp.error.no_unique_name");
-			return Path.COMMAND_VIEW_FACULTY + "&" + AttributeNames.FACULTY_ID + "=" + facultyId;
+			return Path.COMMAND_EDIT_FACULTY + "&" + AttributeNames.FACULTY_ID + "=" + facultyId;
 		}
 
 		if (newNameEn != null && !newNameEn.isEmpty() && FacultyValidation.validationNameEn(newNameEn)) {
@@ -142,6 +142,18 @@ public class EditFacultyCommand extends Command {
 		if (newNameRu != null && !newNameRu.isEmpty() && FacultyValidation.validationNameRu(newNameRu)) {
 			faculty.setNameRu(newNameRu);
 		}
+		
+		if (newNameEn != null && !newNameEn.isEmpty() && !FacultyValidation.validationNameEn(newNameEn)) {
+			request.getSession().setAttribute(AttributeNames.EDIT_FACULTY_ERROR_MESSAGE,
+					"admin.faculties.edit_faculty_jsp.error.incorrect_name");
+			return Path.COMMAND_EDIT_FACULTY + "&" + AttributeNames.FACULTY_ID + "=" + facultyId;
+		}
+		if (newNameRu != null && !newNameRu.isEmpty() && !FacultyValidation.validationNameRu(newNameRu)) {
+			request.getSession().setAttribute(AttributeNames.EDIT_FACULTY_ERROR_MESSAGE,
+					"admin.faculties.edit_faculty_jsp.error.incorrect_name");
+			return Path.COMMAND_EDIT_FACULTY + "&" + AttributeNames.FACULTY_ID + "=" + facultyId;
+		}
+		
 		if (request.getParameter(ParameterNames.NEW_TOTAL_PLACES) != null
 				&& !request.getParameter(ParameterNames.NEW_TOTAL_PLACES).isEmpty()) {
 			newTotalPlaces = Integer.parseInt(request.getParameter(ParameterNames.NEW_TOTAL_PLACES));
@@ -153,7 +165,7 @@ public class EditFacultyCommand extends Command {
 		if (!FacultyValidation.validationPlaces(newTotalPlaces, newBudgetPlaces)) {
 			request.getSession().setAttribute(AttributeNames.EDIT_FACULTY_ERROR_MESSAGE,
 					"admin.faculties.edit_faculty_jsp.error.incorrect_places");
-			return Path.COMMAND_VIEW_FACULTY + "&"+ AttributeNames.FACULTY_ID+"=" + facultyId;
+			return Path.COMMAND_EDIT_FACULTY + "&"+ AttributeNames.FACULTY_ID+"=" + facultyId;
 		} else {
 			faculty.setBudgetPlaces(newBudgetPlaces);
 			faculty.setTotalPlaces(newTotalPlaces);

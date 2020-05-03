@@ -10,7 +10,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @author D.Bratchun
  *
  */
-public class CustomTag extends TagSupport{
+public class CreateFooterTextTag extends TagSupport{
 	
 	private static final long serialVersionUID = 9100500997878679225L;
 

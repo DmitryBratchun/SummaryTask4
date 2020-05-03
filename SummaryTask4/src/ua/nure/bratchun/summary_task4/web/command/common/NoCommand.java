@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import ua.nure.bratchun.summary_task4.Path;
 import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
+import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
 
@@ -32,7 +33,7 @@ public class NoCommand extends Command {
 		LOG.debug("Command starts");
 		
 		String errorMessage = "No such command";
-		request.setAttribute("errorMessage", errorMessage);
+		request.setAttribute(AttributeNames.ERROR_MESSAGE, errorMessage);
 		LOG.error("Set the request attribute: errorMessage --> " + errorMessage);
 
 		LOG.debug("Command finished");

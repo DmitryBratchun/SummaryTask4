@@ -15,6 +15,7 @@ import ua.nure.bratchun.summary_task4.exception.AppException;
 import ua.nure.bratchun.summary_task4.web.HttpMethod;
 import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
+import ua.nure.bratchun.summary_task4.web.command.ParameterNames;
 
 /**
  * Add application to statement
@@ -47,13 +48,13 @@ public class AddToStatementCommand extends Command{
 		
 		int page = 1;
 		int lines = 10;
-		if(request.getParameter(AttributeNames.PAGINATION_PAGE)!=null ) {	
+		if(request.getParameter(ParameterNames.PAGINATION_PAGE)!=null ) {	
 			page = Integer.parseInt(request.getParameter(AttributeNames.PAGINATION_PAGE).replace("/D", ""));
 		}
 		if (page <1){
 			page = 1;
 		} 
-		if(request.getParameter(AttributeNames.PAGINATION_LINES)!=null) {	
+		if(request.getParameter(ParameterNames.PAGINATION_LINES)!=null) {	
 			lines = Integer.parseInt(request.getParameter(AttributeNames.PAGINATION_LINES).replace("/D", ""));
 		}
 		if (lines <1){

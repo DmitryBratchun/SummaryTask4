@@ -47,7 +47,7 @@ public class ViewStatementCommand extends Command{
 		return result;
 	}
 	
-	public String doGet (HttpServletRequest request) throws AppException {
+	private String doGet (HttpServletRequest request) throws AppException {
 		
 		int page = 1;
 		int lines = 10;
