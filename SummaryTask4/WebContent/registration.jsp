@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf"%>
 
 <html>
-<c:set var="title" value="Login" />
+<c:set var="title" value="Registration" />
 <%@ include file="/WEB-INF/jspf/head.jspf"%>
 <body>
 	<table id="main-container">
