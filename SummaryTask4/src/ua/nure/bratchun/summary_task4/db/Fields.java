@@ -22,6 +22,8 @@ public final class Fields {
 	public static final String USER_LANG ="lang";
 	public static final String USER_ROLE ="role_id";
 	
+	public static final String USER_CONFIRM_PASSWORD ="confirm_password";
+	
 	public static final String ENTRANTS_CITY ="city";
 	public static final String ENTRANTS_REGION ="region";
 	public static final String ENTRANTS_SCHOOL ="school";

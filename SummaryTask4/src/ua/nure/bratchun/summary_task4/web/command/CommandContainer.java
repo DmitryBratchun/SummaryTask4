@@ -35,6 +35,9 @@ import ua.nure.bratchun.summary_task4.web.command.error.ViewErrorCommand;
  */
 public class CommandContainer {
 	
+	/**
+	 * Private utility class constructor
+	 */
 	private CommandContainer(){}
 	
 	private static final Logger LOG = Logger.getLogger(CommandContainer.class);

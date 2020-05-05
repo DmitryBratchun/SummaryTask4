@@ -2,7 +2,7 @@ package ua.nure.bratchun.summary_task4.db;
 
 import ua.nure.bratchun.summary_task4.db.entity.Grade;
 /**
- * Exam type
+ * Exam type. 
  * 
  * @author D.Bratchun
  *

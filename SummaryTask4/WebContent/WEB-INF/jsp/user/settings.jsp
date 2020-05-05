@@ -25,6 +25,15 @@
 					<input type="password" name="new_password" autocomplete="off">
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-25">
+					<label><fmt:message key="client.settings_jsp.form.confirm_new_password" /></label>
+				</div>
+				<div class="col-75">
+					<input type="password" name="confirm_new_password" autocomplete="off">
+				</div>
+			</div>
 		
 			<div class="row">
 				<div class="col-25">

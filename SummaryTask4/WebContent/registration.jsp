@@ -40,6 +40,20 @@
 										required>
 								</div>
 							</div>
+							
+							<div class="row">
+								<div class="col-25">
+									<label><fmt:message
+											key="registration_jsp.form.confirm_password" /></label>
+								</div>
+								<div class="col-75">
+									<input type="password" name="confirm_password"
+										placeholder=<fmt:message key="registration_jsp.form.confirm_password" />
+										required>
+								</div>
+							</div>
+							
+							
 							<div class="row">
 								<div class="col-25">
 									<label><fmt:message key="registration_jsp.form.email" /></label>

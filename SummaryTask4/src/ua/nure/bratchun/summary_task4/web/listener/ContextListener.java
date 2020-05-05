@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
- * Context listener
+ * Context listener. Initialize log4j.
  * @author D.Bratchun
  *
  */

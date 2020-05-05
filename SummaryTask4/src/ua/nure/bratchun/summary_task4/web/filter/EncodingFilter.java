@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 /**
- * Encoding filter
+ * Encoding filter.
  * 
  * @author D.Bratchun
  *

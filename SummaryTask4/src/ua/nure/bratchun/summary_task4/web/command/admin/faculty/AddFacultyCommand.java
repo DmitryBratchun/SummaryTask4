@@ -100,7 +100,7 @@ public class AddFacultyCommand extends Command{
 			throw new AppException(Messages.ERR_CANNOT_INSERT_FACULTY, e);
 		}
 		
-		return Path.COMMAND_VIEW_FACULTY;
+		return Path.COMMAND_LIST_FACULTY;
 	}
 	
 	private List<Integer> getNewPreliminarySubjectsId(HttpServletRequest request, String parameter) {

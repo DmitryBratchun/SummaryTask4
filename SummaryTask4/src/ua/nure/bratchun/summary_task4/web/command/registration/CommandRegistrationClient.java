@@ -21,7 +21,7 @@ import ua.nure.bratchun.summary_task4.web.command.AttributeNames;
 import ua.nure.bratchun.summary_task4.web.command.Command;
 
 /**
- * This command use for registration new client
+ * This command use for registration new client.
  * @author D.Bratchun
  */
 public class CommandRegistrationClient extends Command{
@@ -53,6 +53,7 @@ public class CommandRegistrationClient extends Command{
 
 		String login = request.getParameter(Fields.USER_LOGIN);
 		String password = request.getParameter(Fields.USER_PASSWORD);
+		String confirmPassword = request.getParameter(Fields.USER_CONFIRM_PASSWORD);
 		String email = request.getParameter(Fields.USER_EMAIL);
 		String firstName = request.getParameter(Fields.USER_FIRST_NAME);
 		String lastName = request.getParameter(Fields.USER_LAST_NAME);
@@ -73,6 +74,11 @@ public class CommandRegistrationClient extends Command{
 		
 		if(!UserValidation.checkUniquenessEmail(email)) {
 			request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR_MESSAGE, "registration_jsp.error.no_uniq_email");
+			return Path.COMMAND_VIEW_REGISTRATION_PAGE;
+		}
+		
+		if(!password.equals(confirmPassword)) {
+			request.getSession().setAttribute(AttributeNames.REGISTRATION_ERROR_MESSAGE, "registration_jsp.error.password_mismatch");
 			return Path.COMMAND_VIEW_REGISTRATION_PAGE;
 		}
 		

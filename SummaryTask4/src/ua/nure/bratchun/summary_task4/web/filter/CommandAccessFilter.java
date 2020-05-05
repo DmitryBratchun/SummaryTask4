@@ -63,7 +63,11 @@ public class CommandAccessFilter implements Filter {
 			.forward(request, response);
 		}
 	}
-	
+	/**
+	 * Checks access to commands.
+	 * @param request
+	 * @return boolean result
+	 */
 	private boolean accessAllowed(ServletRequest request) {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 

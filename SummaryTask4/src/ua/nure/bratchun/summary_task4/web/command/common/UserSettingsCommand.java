@@ -56,14 +56,25 @@ public class UserSettingsCommand extends Command{
 		User user = null;
 		UserDAO userDAO = UserDAO.getInstance(); 
 		String newPassword = request.getParameter(ParameterNames.NEW_PASSWORD);
+		String confirmNewPassword = request.getParameter(ParameterNames.CONFIRM_NEW_PASSWORD);
 		String newEmail = request.getParameter(ParameterNames.NEW_EMAIL);
 		String newLand = request.getParameter(ParameterNames.LANG);
+		
 		LOG.debug("User try to change his password to (" + newPassword + ") and email to (" + newEmail + ")");
 		if((user=(User) session.getAttribute(AttributeNames.USER)) == null) {
 			return Path.COMMAND_VIEW_LOGIN_PAGE;
 		}
 		if(!newPassword.isEmpty() && newPassword.length() < 2) {
 			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "user.settings_jsp.error.incorrect_password");
+			return Path.COMMAND_SETTINGS_USER;
+		}
+		
+		if(!confirmNewPassword.isEmpty() && confirmNewPassword.length() < 2) {
+			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "user.settings_jsp.error.incorrect_password");
+			return Path.COMMAND_SETTINGS_USER;
+		}
+		if(!newPassword.equals(confirmNewPassword)) {
+			session.setAttribute(AttributeNames.USER_SETTINGS_ERROR_MESSAGE, "registration_jsp.error.password_mismatch");
 			return Path.COMMAND_SETTINGS_USER;
 		}
 		

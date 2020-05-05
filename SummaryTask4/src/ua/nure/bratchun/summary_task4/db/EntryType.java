@@ -2,7 +2,7 @@ package ua.nure.bratchun.summary_task4.db;
 
 import ua.nure.bratchun.summary_task4.db.entity.Application;
 /**
- * University admission status
+ * University admission status. After creating the statement, all users included in the statement receive the status.
  * 
  * @author D.Bratchun
  *

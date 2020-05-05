@@ -7,7 +7,7 @@ package ua.nure.bratchun.summary_task4.exception;
  */
 public class AppException  extends Exception{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5733037831413544616L;
 
 	public AppException() {
 		super();

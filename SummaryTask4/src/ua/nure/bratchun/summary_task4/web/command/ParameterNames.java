@@ -15,6 +15,7 @@ public class ParameterNames {
 	public static final String PASSWORD = "password";
 	public static final String LOGIN = "login";
 	public static final String NEW_PASSWORD = "new_password";
+	public static final String CONFIRM_NEW_PASSWORD = "confirm_new_password";
 	public static final String NEW_EMAIL = "new_email";
 	
 	public static final String LANG = "lang";
