@@ -76,6 +76,7 @@ public class EntryFacultyCommand extends Command{
 			request.getSession().setAttribute(AttributeNames.ENTRY_FACULTY_ERROR_MESSAGE, "client.entry.entry_faculty_jsp.already_registered");
 			return Path.COMMAND_VIEW_FACULTY + "&"+ AttributeNames.FACULTY_ID +"=" + facultyId;
 		}
+		
 		// Compose all grades
 		List<Grade> grades = composeGrades(diplomaSubjectsId, preliminarySubjectsId, entrantId, facultyId, request);
 		// insert all grades in DB
