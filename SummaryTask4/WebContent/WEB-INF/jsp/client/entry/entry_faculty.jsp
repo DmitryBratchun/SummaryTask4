@@ -63,6 +63,9 @@
 									</div>
 								</div>							
 						</c:forEach>
+						<c:if test="${empty preliminarySubjects}">
+							<fmt:message key="client.entry.entry_faculty_jsp.absent" />
+						</c:if>
 						<div class="row">
 								<input class="form" type="submit" name="submit"
 									value=<fmt:message key="client.entry.entry_faculty_jsp.submit" />>
